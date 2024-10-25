@@ -1,7 +1,9 @@
 # SampPluginTemplate
 
+Simple project plugin for sa:mp server
 
-## Build and create
+
+## Build
 
 ```bash
 cmake -B build -A Win32
