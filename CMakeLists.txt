@@ -34,7 +34,7 @@ target_sources(${PROJECT_NAME} PRIVATE
     source/script.h
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}" SUFFIX ".dll")
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "${PROJECT_NAME}")
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     HAVE_STDINT_H
