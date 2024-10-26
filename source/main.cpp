@@ -1,34 +1,15 @@
-#include "headers.hpp"
+#include "main.h"
 
-typedef void(*logprintf_t)(char* format, ...);
-logprintf_t logprintf;
-void **ppPluginData;
-extern void *pAMXFunctions;
-PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData)
-{
-    pAMXFunctions = ppData[PLUGIN_DATA_AMX_EXPORTS];
-    logprintf = (logprintf_t)ppData[PLUGIN_DATA_LOGPRINTF];
+PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports() {
+  return SUPPORTS_VERSION | SUPPORTS_AMX_NATIVES | SUPPORTS_PROCESS_TICK;
+}
 
-		logprintf("  test plugin loaded");
-    return 1;
+PLUGIN_EXPORT bool PLUGIN_CALL Load(void **ppData) {
+  return Plugin::DoLoad(ppData);
 }
-PLUGIN_EXPORT void PLUGIN_CALL Unload()
-{
-    
-}
-AMX_NATIVE_INFO NATIVES_LIST[] =
-{
-    { 0, 0 }
-};
-PLUGIN_EXPORT unsigned int PLUGIN_CALL Supports()
-{
-    return SUPPORTS_VERSION | SUPPORTS_AMX_NATIVES;
-}
-PLUGIN_EXPORT int PLUGIN_CALL AmxLoad(AMX *amx)
-{
-    return amx_Register(amx, NATIVES_LIST, -1);
-}
-PLUGIN_EXPORT int PLUGIN_CALL AmxUnload(AMX *amx)
-{
-    return AMX_ERR_NONE;
-} 
+
+PLUGIN_EXPORT void PLUGIN_CALL Unload() { Plugin::DoUnload(); }
+
+PLUGIN_EXPORT void PLUGIN_CALL AmxLoad(AMX *amx) { Plugin::DoAmxLoad(amx); }
+
+PLUGIN_EXPORT void PLUGIN_CALL ProcessTick() { Plugin::DoProcessTick(); }
